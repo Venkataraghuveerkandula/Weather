@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Report</title>
+    <style>
+        body {
+            background-image: url('https://s1.1zoom.me/b5050/156/Sky_Clouds_Sun_559129_3840x2400.jpg');
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            margin: 0 auto;
+            width: 50%;
+            text-align: center;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            background-color: #fff;
+        }
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        input[type="text"] {
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+            margin-right: 10px;
+            width: 60%;
+        }
+        button {
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+            background-color: #4CAF50;
+            color: #fff;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #3e8e41;
+        }
+        .weather {
+            margin-top: 20px;
+            font-size: 1.5rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Weather</h1>
+        <input type="text" id="city" placeholder="Enter City Name">
+        <button onclick="getWeather()">Get Weather</button>
+        <div class="weather" id="weather"></div>
+    </div>
+    <script>
+        function getWeather() {
+            const city = document.getElementById("city").value;
+            const url = `https://wttr.in/${city}?format=%C+%t`;
+            fetch(url)
+                .then(response => response.text())
+                .then(data => {
+                    const weather = document.getElementById("weather");
+                    weather.innerHTML = data;
+                })
+                .catch(error => {
+                    console.log(error);
+                });
+        }
+    </script>
+</body>
+</html>
